@@ -1,0 +1,43 @@
+services:
+  app:
+    build: .
+    container_name: legendary-succotash
+    ports:
+      - "8085:8085"
+    environment:
+      APP_HOST: 0.0.0.0
+      APP_PORT: "8085"
+      TOKEN_SECRET: ${TOKEN_SECRET:-dev-secret-change-me}
+      POSTGRES_HOST: postgresdb
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DBNAME: ${POSTGRES_DBNAME:-goproject}
+    depends_on:
+      - postgresdb
+    restart: on-failure
+    networks:
+      - app-net
+
+  postgresdb:
+    build:
+      context: ./database
+      dockerfile: db.Dockerfile
+    container_name: legendary-succotash-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DBNAME:-goproject}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-net
+
+volumes:
+  postgres-data:
+
+networks:
+  app-net:
+    driver: bridge
