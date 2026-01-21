@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: legendary-succotash
+  name: session-smuggler
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: legendary-succotash
+      app: session-smuggler
   template:
     metadata:
       labels:
-        app: legendary-succotash
+        app: session-smuggler
     spec:
       containers:
-        - name: legendary-succotash
-          image: d28035203/legendary-succotash:latest
+        - name: session-smuggler
+          image: d28035203/session-smuggler:latest
           ports:
             - containerPort: 8085
           env:
@@ -50,11 +50,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: legendary-succotash
+  name: session-smuggler
 spec:
   type: ClusterIP
   ports:
     - port: 8085
       targetPort: 8085
   selector:
-    app: legendary-succotash
+    app: session-smuggler

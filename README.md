@@ -1,4 +1,4 @@
-# Legendary Succotash
+# Session Smuggler
 
 Go REST API with JWT authentication, GORM, and PostgreSQL. Includes Docker Compose and Kubernetes manifests.
 
@@ -25,7 +25,7 @@ Go REST API with JWT authentication, GORM, and PostgreSQL. Includes Docker Compo
 ## Project Structure
 
 ```
-legendary-succotash/
+session-smuggler/
 ├── app/                 # Bootstrap, middleware, env validation
 ├── database/            # Connection helper, init SQL, DB Dockerfile
 ├── handlers/            # Auth + health handlers
@@ -51,8 +51,8 @@ legendary-succotash/
 ## Quick Start
 
 ```bash
-git clone https://github.com/d28035203/legendary-succotash.git
-cd legendary-succotash
+git clone https://github.com/d28035203/session-smuggler.git
+cd session-smuggler
 cp .env.example .env
 # edit TOKEN_SECRET and Postgres settings
 

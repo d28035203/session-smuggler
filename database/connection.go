@@ -1,24 +1,27 @@
+// Package database manages the PostgreSQL connection used by handlers.
 package database
 
 import (
 	"fmt"
 	"os"
 
-	"github.com/d28035203/legendary-succotash/models"
+	"github.com/d28035203/session-smuggler/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
 
-// Database wraps the GORM connection used by handlers.
+// Database wraps a GORM connection so it can be injected into route handlers.
 type Database struct {
 	DB *gorm.DB
 }
 
-// Connect opens a PostgreSQL connection and runs AutoMigrate.
+// Connect opens PostgreSQL using env-based DSN settings and runs AutoMigrate
+// for User and UserSessions so the schema stays in sync with the models.
 func Connect() (*Database, error) {
 	dsn := getDSN()
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		// Warn-level logging avoids flooding stdout with every SQL statement.
 		Logger: logger.Default.LogMode(logger.Warn),
 	})
 	if err != nil {
@@ -32,6 +35,7 @@ func Connect() (*Database, error) {
 	return &Database{DB: db}, nil
 }
 
+// getDSN builds a lib/pq-style DSN from environment variables.
 func getDSN() string {
 	return fmt.Sprintf(
 		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",

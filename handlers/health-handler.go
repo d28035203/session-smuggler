@@ -4,10 +4,11 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// HandleHealthCheck returns a simple OK response for probes and load balancers.
+// HandleHealthCheck returns a small JSON payload used by load balancers and orchestrators
+// to confirm the process is up (does not check database connectivity).
 func HandleHealthCheck(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"status":  "ok",
-		"service": "legendary-succotash",
+		"service": "session-smuggler",
 	})
 }

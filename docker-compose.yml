@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    container_name: legendary-succotash
+    container_name: session-smuggler
     ports:
       - "8085:8085"
     environment:
@@ -23,7 +23,7 @@ services:
     build:
       context: ./database
       dockerfile: db.Dockerfile
-    container_name: legendary-succotash-db
+    container_name: session-smuggler-db
     ports:
       - "5432:5432"
     environment:

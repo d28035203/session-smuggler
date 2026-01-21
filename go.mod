@@ -1,4 +1,4 @@
-module github.com/d28035203/legendary-succotash
+module github.com/d28035203/session-smuggler
 
 go 1.22
 
