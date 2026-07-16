@@ -1,4 +1,6 @@
-# Session Smuggler
+# Go JWT Session API
+
+> Repository: `session-smuggler` · https://github.com/d28035203/session-smuggler
 
 Go REST API with JWT authentication, GORM, and PostgreSQL. Includes Docker Compose and Kubernetes manifests.
 
